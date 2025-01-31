@@ -17,7 +17,7 @@ app = Flask(__name__)
 csrf = CSRFProtect(app)
 
 # PostgreSQL database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://myapp_user:password@10.10.128.203/myapp_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://myapp_user:myapp_password@<database-IP-address>/myapp_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable modification tracking for performance
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'your_default_secret_key')  # Secret key for flash messages
 
