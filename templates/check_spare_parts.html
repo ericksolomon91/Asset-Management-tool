@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Spare Parts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Asset Management Tool</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ url_for('home') }}">Home</a>
+                        <a class="dropdown-item" href="{{ url_for('check_spare_parts') }}">Spare Parts List</a>
+                        <a class="dropdown-item" href="{{ url_for('create_receipt') }}">Create Delivery Receipt</a>
+                        <a class="dropdown-item" href="{{ url_for('view_receipts') }}">View Receipt</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Spare Parts List</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Part Number</th>
+                    <th>Serial Number</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for part in parts %}
+                    <tr>
+                        <td>{{ part.part_number }}</td>
+                        <td>{{ part.serial_number }}</td>
+                        <td>{{ part.quantity }}</td>
+                        <td>{{ part.status }}</td>
+                        <td>
+                            <a href="{{ url_for('edit', part_id=part.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <!-- Delete button removed -->
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

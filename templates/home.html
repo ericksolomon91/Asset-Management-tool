@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Management Tool</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .navbar {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        .content {
+            padding-top: 70px; /* Space for fixed navbar */
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Asset Management Tool</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ url_for('home') }}">Home</a>
+                        <a class="dropdown-item" href="{{ url_for('check_spare_parts') }}">Spare Parts List</a>
+                        <a class="dropdown-item" href="{{ url_for('create_receipt') }}">Create Delivery Receipt</a>
+                        <a class="dropdown-item" href="{{ url_for('view_receipts') }}">View Receipt</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container content">
+        <div class="card">
+            <div class="card-header">
+                <h2>Add Spare Part</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('home') }}">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.part_number.label(class="form-label") }}
+                        {{ form.part_number(class="form-control", size=32) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.serial_number.label(class="form-label") }}
+                        {{ form.serial_number(class="form-control", size=32) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.quantity.label(class="form-label") }}
+                        {{ form.quantity(class="form-control", value=1) }} <!-- Default value set to 1 -->
+                    </div>
+                    <div class="form-group">
+                        {{ form.status.label(class="form-label") }}
+                        {{ form.status(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h2>Spare Parts List</h2>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Part Number</th>
+                            <th>Serial Number</th>
+                            <th>Quantity</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for part in parts %}
+                            <tr>
+                                <td>{{ part.part_number }}</td>
+                                <td>{{ part.serial_number }}</td>
+                                <td>{{ part.quantity }}</td>
+                                <td>{{ part.status }}</td>
+                                <td>
+                                    <a href="{{ url_for('edit', part_id=part.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

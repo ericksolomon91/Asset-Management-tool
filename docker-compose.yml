@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5001:5001"
+    depends_on:
+      - db
+    environment:
+      - FLASK_ENV=development
+      - FLASK_SECRET_KEY=your_secret_key
+      - DATABASE_URL=postgresql://myapp_user:password@db/myapp_db
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: myapp_db
+      POSTGRES_USER: myapp_user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

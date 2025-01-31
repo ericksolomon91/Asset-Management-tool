@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Delivery Receipts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Asset Management Tool</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ url_for('home') }}">Home</a>
+                        <a class="dropdown-item" href="{{ url_for('check_spare_parts') }}">Spare Parts List</a>
+                        <a class="dropdown-item" href="{{ url_for('create_receipt') }}">Create Delivery Receipt</a>
+                        <a class="dropdown-item" href="{{ url_for('view_receipts') }}">View Receipt</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h2 class="text-center">View Delivery Receipts</h2>
+        <div class="row">
+            {% for receipt in receipts %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Receipt ID: {{ receipt.id }}</h5>
+                        <p class="card-text"><strong>Receipt Number:</strong> {{ receipt.receipt_number }}</p>
+                        <p class="card-text"><strong>Customer Name:</strong> {{ receipt.customer_name }}</p>
+                        <p class="card-text"><strong>Part Number:</strong> {{ receipt.part_number }}</p>
+                        <p class="card-text"><strong>Serial Number:</strong> {{ receipt.serial_number }}</p>
+                        <p class="card-text"><strong>Quantity:</strong> {{ receipt.quantity }}</p>
+                        <p class="card-text"><strong>Date Created:</strong> {{ receipt.date_created }}</p>
+                        <p class="card-text"><strong>Delivery Status:</strong> {{ receipt.delivery_status }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
