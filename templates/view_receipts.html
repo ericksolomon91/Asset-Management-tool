@@ -36,10 +36,12 @@
                         <p class="card-text"><strong>Receipt Number:</strong> {{ receipt.receipt_number }}</p>
                         <p class="card-text"><strong>Customer Name:</strong> {{ receipt.customer_name }}</p>
                         <p class="card-text"><strong>Part Number:</strong> {{ receipt.part_number }}</p>
+                        <p class="card-text"><strong>Part Name:</strong> {{ receipt.part_name }}</p>
                         <p class="card-text"><strong>Serial Number:</strong> {{ receipt.serial_number }}</p>
                         <p class="card-text"><strong>Quantity:</strong> {{ receipt.quantity }}</p>
                         <p class="card-text"><strong>Date Created:</strong> {{ receipt.date_created }}</p>
                         <p class="card-text"><strong>Delivery Status:</strong> {{ receipt.delivery_status }}</p>
+                        <a href="{{ url_for('download_receipt', receipt_id=receipt.id) }}" class="btn btn-primary">Download Receipt</a>
                     </div>
                 </div>
             </div>

@@ -8,15 +8,19 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h1 class="text-Left">Edit Spare Part</h1>
+        <h1 class="text-left">Edit Spare Part</h1>
 
         <form method="POST" action="{{ url_for('edit', part_id=part.id) }}">
-            {{ form.hidden_tag() }}
+            {{ form.hidden_tag() }}  
             <input type="hidden" name="next" value="{{ url_for('home') }}">
 
             <div class="form-group">
                 <label for="part_number">Part Number</label>
                 {{ form.part_number(class="form-control") }}
+            </div>
+            <div class="form-group">
+                <label for="part_name">Part Name</label>  
+                {{ form.part_name(class="form-control") }}
             </div>
             <div class="form-group">
                 <label for="serial_number">Serial Number</label>
@@ -38,61 +42,59 @@
             </div>
         </form>
 
-    <!-- Update Confirmation Modal -->
-<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="updateModalLabel">Confirm Update</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to update this item?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary" id="confirmUpdate">Yes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    // When "Yes" is clicked in the update modal, submit the main form
-    document.getElementById("confirmUpdate").addEventListener("click", function() {
-        document.querySelector("form").submit();
-    });
-</script>
-
-
-    <!-- Delete Confirmation Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to delete this item?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <form method="POST" action="{{ url_for('delete', part_id=part.id) }}">
-                        {{ form.hidden_tag() }}  <!-- Include CSRF token -->
-                        <button type="submit" class="btn btn-danger">Yes</button>
-                    </form>
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updateModalLabel">Confirm Update</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to update this item?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-primary" id="confirmUpdate">Yes</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            // When "Yes" is clicked in the update modal, submit the main form
+            document.getElementById("confirmUpdate").addEventListener("click", function() {
+                document.querySelector("form").submit();
+            });
+        </script>
+
+        <!-- Delete Confirmation Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this item?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <form method="POST" action="{{ url_for('delete', part_id=part.id) }}">
+                            <button type="submit" class="btn btn-danger">Yes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </div>
 </body>
 </html>

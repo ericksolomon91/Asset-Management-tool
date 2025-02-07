@@ -38,18 +38,22 @@
 
         <h2>Create Delivery Receipt</h2>
         <form method="POST" action="{{ url_for('create_receipt') }}">
-            {{ form.hidden_tag() }}
+            {{ form.hidden_tag() }}  <!-- Add CSRF token -->
             <div class="form-group">
                 {{ form.customer_name.label(class="form-label") }}
                 {{ form.customer_name(class="form-control") }}
             </div>
             <div class="form-group">
                 {{ form.part_number.label(class="form-label") }}
-                {{ form.part_number(class="form-control") }}
+                {{ form.part_number(class="form-control", value=request.args.get('part_number')) }}  
+            </div>
+            <div class="form-group">
+                {{ form.part_name.label(class="form-label") }}
+                {{ form.part_name(class="form-control", value=request.args.get('part_name')) }}  
             </div>
             <div class="form-group">
                 {{ form.serial_number.label(class="form-label") }}
-                {{ form.serial_number(class="form-control") }}
+                {{ form.serial_number(class="form-control", value=request.args.get('serial_number')) }}  
             </div>
             <div class="form-group">
                 {{ form.quantity.label(class="form-label") }}
@@ -64,7 +68,7 @@
             </div>
         </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
