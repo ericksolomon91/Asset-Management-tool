@@ -15,7 +15,7 @@ from wtforms.validators import DataRequired, Length, NumberRange
 app = Flask(__name__)
 
 # PostgreSQL database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://myapp_user:password@10.10.128.203/myapp_db' # Update with your database URI!!!!
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://myapp_user:password@vm_ip-address/myapp_db' # Update with your database URI!!!!
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'your_default_secret_key')
 
